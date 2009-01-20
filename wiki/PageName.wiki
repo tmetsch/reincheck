@@ -1,0 +1,16 @@
+#summary Using ReInCheck within a maven based OSGi project.
+
+= Introduction =
+
+This page shows howto to ReInCheck within a maven based project, where each maven modules embeds a OSGi Bundle.
+
+
+= Details =
+
+== Environment ==
+
+== Setup ==
+
+== Howto run ReInCheck ==
+
+== Sample Report ==
