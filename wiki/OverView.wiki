@@ -28,7 +28,9 @@ Currently the following checks exist:
   * EmptyPackageCheck - Checks if a directory contains no files
   * GetMisplacesFilesInJavaDiretories - Checks if a directory contains other files then .java
   * ImportCheck - Can be run when the target files are OSGi bundles. Will create a graoh with all the dependencies and report those.
-  * ExportCheck - Can be run when the target files are OSGi bundles. Will create a list of pakcages which are never imported but exported by one bundle
+  * ExportCheck - Can be run when the target files are OSGi bundles. Will create a list of packages which are never imported but exported by one bundle
+  * CheckForMissingJUnitTest - Looks for missing Junittest. If the normal would be /src/main/java/Somefile.java it tries to find the file /src/test/java/SomefileTest.java. Interfaces are not taken in account.
+  * CheckForUndeletedJUnitTest - Looks if there is a source file for every Junittest. E.g. /src/test/java/SomefileTest.java should have a /src/main/java/Somefile.java
 
 == Config file ==
 
@@ -62,4 +64,3 @@ Finally the checks are defined. In this case it states: for every source and tes
 == Upcoming features ==
 
   * Support of configuring to store graphs instead of displaying them
-  * Check to verify the Unittest integrity (If they are available etc)
