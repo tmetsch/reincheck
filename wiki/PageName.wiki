@@ -40,8 +40,8 @@ scmPrefix = .svn
 rootWalker = MultiModuleMavenWalker
 
 [checks]
-srcChecks = EmptyPackageCheck, GetMisplacesFilesInJavaDiretories
-testChecks = EmptyPackageCheck, GetMisplacesFilesInJavaDiretories
+srcChecks = EmptyPackageCheck, GetMisplacesFilesInJavaDiretories, CheckForMissingJUnitTest
+testChecks = EmptyPackageCheck, GetMisplacesFilesInJavaDiretories, CheckForUndeletedJUnitTest
 resourceChecks =
 targetChecks = ImportCheck, ExportCheck
 }}}
