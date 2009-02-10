@@ -58,6 +58,65 @@ class GetMisplacesFilesInJavaDiretories(Check):
 	
 	return (report, errors, graph)
 
+class CheckForMissingJUnitTest(Check):
+    
+    def check(self, directories, scm_dir):
+	graph = DiGraph()
+        errors = []
+        report = '\n--------\n Checking Files which do not have a Unittest \n--------\n'
+		
+	for directory in directories:
+	    for root, dirs, files in os.walk(directory):
+		if scm_dir in dirs:
+		    dirs.remove(scm_dir)
+		for file in files:
+		    testFile = os.path.join(root.replace('main', 'test'), file.replace('.java', 'Test.java'))
+		    tempFile = open(os.path.join(root, file), 'r')
+		    temp = tempFile.read()
+		    tempFile.close()
+		    if str(temp).find('public interface') != -1:
+			files.remove(file)
+			break
+		    if not self.fileExists(testFile):
+			errors.append("Missing unit test for " + str(os.path.join(root, file)))
+	
+	return (report, errors, graph)
+    
+    def fileExists(self, filename):
+	try:
+	    file = open(filename)
+	except IOError:
+	    exists = 0
+	else:
+	    exists = 1
+	return exists
+
+class CheckForUndeletedJUnitTest(Check):
+    
+    def check(self, directories, scm_dir):
+	graph = DiGraph()
+        errors = []
+        report = '\n--------\n Checking Unittest where the source file is missing \n--------\n'
+		
+	for directory in directories:
+	    for root, dirs, files in os.walk(directory):
+		if scm_dir in dirs:
+		    dirs.remove(scm_dir)
+		for file in files:
+		    sourceFile = os.path.join(root.replace('test', 'main'), file.replace('Test.java', '.java'))
+		    if not self.fileExists(sourceFile):
+			errors.append("Dead unittest found: " + os.path.join(root, file))
+	return (report, errors, graph) 
+		    
+    def fileExists(self, filename):
+	try:
+	    file = open(filename)
+	except IOError:
+	    exists = 0
+	else:
+	    exists = 1
+	return exists
+    
 class ImportCheck(Check):
     
     def check(self, files, scmPrefix):
