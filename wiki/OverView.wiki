@@ -17,7 +17,7 @@ A walker is a tool which ReInCheck uses to 'walk' through your repository. A wal
 
 Currently only a walker for a multi module maven project exists. It returns all the source code directories from the modules itself when he is asked to return the source code directories.
 
-With the help of walkers it is possible to support almost any kind of layout for your project. Just write your own :-)
+With the help of walkers it is possible to support almost any kind of repository layouts for your project. Just write your own :-)
 
 == Checks ==
 
