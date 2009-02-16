@@ -141,7 +141,7 @@ class ImportCheck(Check):
 	                    print "Unexpected error:", sys.exc_info()[0]
 	                if len(temp) > 0:
 	                    graph.add_edge(bundle1.getSymbolicName(), bundle2.getSymbolicName())
-	                    report = report + bundle1.getSymbolicName() + ' depends on ' + bundle2.getSymbolicName() + '\n'
+	                    report = report + bundle1.getSymbolicName() + ' depends on ' + bundle2.getSymbolicName() + " because of: " + str(temp)  + '\n'
         return (report, errors, graph)
     
     def intersect(self, a, b):
