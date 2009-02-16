@@ -19,6 +19,7 @@
 import zipfile
 import string
 import sys
+import re
 
 class Bundle:
     
@@ -59,9 +60,9 @@ class Bundle:
     
     def getExports(self):
         try:
-            exports = self.manifest['Export-Package'].replace('\n','').split(',')
-            strippedexports = [item[:item.find(';')].replace('\"','') for item in exports]
-            # if item.find(';') > -1
+            exports = self.manifest['Export-Package'].replace('\n','')
+            strippedexports = (re.sub(";uses:=\"(\w+.)*", "", exports)).split(',')
+
             return strippedexports
         except:
             return list()
